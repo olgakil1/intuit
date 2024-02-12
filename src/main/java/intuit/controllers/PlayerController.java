@@ -26,7 +26,7 @@ public class PlayerController extends BaseController{
     @GetMapping("/{playerId}")
     public ResponseEntity<PlayerDetailsDTO> getPlayerById(@PathVariable Integer playerId) {
         Optional<PlayerDetailsDTO> player = this.playerService.get(playerId);
-        if (Optional.ofNullable(player).isPresent()) {
+        if (Optional.ofNullable(player).isPresent() && Optional.of(player).get().isPresent()){
             return ResponseEntity.ok(player.get());
         } else {
             return ResponseEntity.notFound().build();
