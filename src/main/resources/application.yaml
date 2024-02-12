@@ -16,7 +16,7 @@ spring:
     active: dev
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:5433/test
+    url: jdbc:postgresql://127.0.0.1:5432/test
     username: postgres
     password: admin
   jpa:

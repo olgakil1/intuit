@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class PlayerDetailsDTO {
     private Integer deathYear;
     private Integer deathMonth;
     private Integer deathDay;
-    private Date firstGameDate;
-    private Date lastGameDate;
+    private LocalDate firstGameDate;
+    private LocalDate lastGameDate;
 
   }

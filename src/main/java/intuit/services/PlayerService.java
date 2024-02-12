@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.Tuple;
 import javax.validation.constraints.NotBlank;
+import java.math.BigInteger;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +33,7 @@ public class PlayerService {
 
     private static PlayerDetailsDTO getPlayerDetailsDTO(Tuple result) {
         PlayerDetailsDTO dto = new PlayerDetailsDTO(
-                result.get("playerID", Integer.class),
+                result.get("playerID", BigInteger.class).intValue(),
                 result.get("nameFirst", String.class),
                 result.get("nameLast", String.class),
                 result.get("nameGiven", String.class),
@@ -43,17 +45,23 @@ public class PlayerService {
                 result.get("deathYear", Integer.class),
                 result.get("deathMonth", Integer.class),
                 result.get("deathDay", Integer.class),
-                result.get("firstGameDate", Date.class),
-                result.get("lastGameDate", Date.class));
+                Optional.ofNullable(result.get("firstGameDate", Timestamp.class))
+                        .map(Timestamp::toLocalDateTime)
+                        .map(java.time.LocalDateTime::toLocalDate)
+                        .orElse(null),
+                Optional.ofNullable(result.get("lastGameDate", Timestamp.class))
+                        .map(Timestamp::toLocalDateTime)
+                        .map(java.time.LocalDateTime::toLocalDate)
+                        .orElse(null));
         return dto;
     }
 
 
     public Optional<PlayerDetailsDTO> get(@NotBlank Integer playerId) {
         Tuple result = playerRepository.findPlayerDetailsById(playerId);
-        if(result != null && result.getElements().size()>0){
-            return Optional.ofNullable(getPlayerDetailsDTO(result));
+        if(result != null && !result.getElements().isEmpty()){
+            return Optional.of(getPlayerDetailsDTO(result));
         }
-        return null;
+        return Optional.empty();
     }
 }

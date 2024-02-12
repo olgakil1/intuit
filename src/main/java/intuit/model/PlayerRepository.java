@@ -23,7 +23,7 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
             "first_game.first_game_date as firstGameDate, " +
             "last_game.last_game_date as lastGameDate " +
             "FROM player p " +
-            "INNER JOIN population_registry pr ON p.populationregistryid = pr.pid " +
+            "INNER JOIN population_registry pr ON p.population_registryid = pr.pid " +
             "LEFT JOIN birth_death_registry bd_birth ON pr.birth = bd_birth.bdid " +
             "LEFT JOIN birth_death_registry bd_death ON pr.death = bd_death.bdid " +
             "LEFT JOIN ( " +
@@ -48,7 +48,7 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
             "first_game.first_game_date as firstGameDate, " +
             "last_game.last_game_date as lastGameDate " +
             "FROM player p " +
-            "INNER JOIN population_registry pr ON p.populationregistryid = pr.pid and p.playerid = :playerID " +
+            "INNER JOIN population_registry pr ON p.population_registryid = pr.pid and p.playerid = :playerID " +
             "LEFT JOIN birth_death_registry bd_birth ON pr.birth = bd_birth.bdid " +
             "LEFT JOIN birth_death_registry bd_death ON pr.death = bd_death.bdid " +
             "LEFT JOIN ( " +

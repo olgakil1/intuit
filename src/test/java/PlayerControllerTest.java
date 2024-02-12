@@ -3,6 +3,7 @@
 import intuit.controllers.PlayerController;
 import intuit.dto.PlayerDetailsDTO;
 import intuit.services.PlayerService;
+import javafx.util.converter.LocalDateStringConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -73,10 +75,10 @@ public class PlayerControllerTest {
     public void listPlayers_ShouldReturnPlayerNoGames() throws Exception {
         // Arrange
         PlayerDetailsDTO playerOne = new PlayerDetailsDTO(
-                1,"p1","p1","p1",1978,1,1,2050,1,1,new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()));
+                1,"p1","p1","p1",1978,1,1,2050,1,1,null,null);
 
         PlayerDetailsDTO playerTwo = new PlayerDetailsDTO(
-                1,"p3","p4","p3",1978,1,1,2050,1,1,new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()));
+                1,"p3","p4","p3",1978,1,1,2050,1,1,null, null);
 
         List<PlayerDetailsDTO> playerList = Arrays.asList(playerOne, playerTwo);
 
@@ -94,10 +96,10 @@ public class PlayerControllerTest {
     public void listPlayers_ShouldReturnPlayerListAllDataExist() throws Exception {
         // Arrange
         PlayerDetailsDTO playerOne = new PlayerDetailsDTO(
-                1,"p1","p1","p1",1978,1,1,2050,1,1,new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()));
+                1,"p1","p1","p1",1978,1,1,2050,1,1,LocalDate.now(),LocalDate.now());
 
         PlayerDetailsDTO playerTwo = new PlayerDetailsDTO(
-                1,"p3","p4","p3",1978,1,1,2050,1,1,new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()));
+                1,"p3","p4","p3",1978,1,1,2050,1,1,LocalDate.now(),LocalDate.now());
 
         List<PlayerDetailsDTO> playerList = Arrays.asList(playerOne, playerTwo);
 
